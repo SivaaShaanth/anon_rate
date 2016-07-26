@@ -32,7 +32,7 @@ if(! $retval )
   die('Could not enter data: ' . mysql_error());
 }
 else
-header('Location: cse.html');
+header('Location: it.html');
 
 
 
