@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+<head><title>Anonymous-CSE|Welcome to anonymous</title>
+<style type="text/css">
+div {
+    height: 200px;
+    width: 400px;
+    background: white;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -200px;
+}
+</style>
+</head>
+<body>
+<div>
+<?php 
+mysql_connect("localhost", "root", "valencebond") or die(mysql_error());
+mysql_select_db("mydb") or die(mysql_error());
+$result = mysql_query("SELECT * FROM teacherscs")
+or die(mysql_error());
+
+$numrows = mysql_num_rows($result);
+
+if($numrows == 0){
+echo "No records.Under construction";
+}
+else{
+while($row = mysql_fetch_array( $result ))
+
+{
+$text=$row["name"];
+$id=$row["id"];
+$rate=$row["rating"];
+echo "<p>Name of the faculty : $text</p>";
+echo "<p>Current ratings: $rate </p>";
+?>
+<p> Add rating: </p>
+<form action="updaterating.php" method="get">
+  <input type="hidden" name="id" value="<?php echo $id; ?>" > 
+  <input type="radio" name="rating" value="1"><i></i>
+  <input type="radio" name="rating" value="2"><i></i>
+  <input type="radio" name="rating" value="3"><i></i>
+  <input type="radio" name="rating" value="4"><i></i>
+  <input type="radio" name="rating" value="5"><i></i>
+  <input type="submit">
+</form>
+<?php
+}
+}
+?>
+</div>
+</body>
+</html>
+
+
+
+
+
